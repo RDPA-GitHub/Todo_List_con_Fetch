@@ -17,9 +17,9 @@ const TaskForm = ({onSubmit}) => {
     e.preventDefault();
 
     const tareaNueva = {
-      id: uuidv4(),
-      texto: input,
-      completada: false
+      
+      text: input
+      
     }
     onSubmit(tareaNueva);
     setInput("")
@@ -38,7 +38,7 @@ const TaskForm = ({onSubmit}) => {
         type="text"
         className="task-input"
         placeholder='Ingrese una Tarea'
-        name='texto'  
+        name='text'  
         value={input}
         onChange={manejarCambio}
         />
