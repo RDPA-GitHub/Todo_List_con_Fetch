@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
+.tasks-container {
+  width: 500px;
+  min-height: 35px;
+  background-color: #3a5e75;
+  margin: 5px 0;
+  padding: 8px 15px 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 7px;
+  border: 1px solid gray;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px 2px rgba(133, 131, 131, 0.796);
+}
+
+/* Estilo para el Texto */
+
+.tasks-text {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  display: flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+
+/* Estilo para el icono */
+
+.tasks-icon {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+}
+
+.tasks-icon:hover {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  color: rgb(255, 60, 60);
+}
+
+.tasks-container.completada {
+  background-color: #40b36a;
+  text-decoration: line-through;
+}

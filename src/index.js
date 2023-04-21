@@ -1,6 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Main from './Main';
 
-const ROOT = ReactDOM.createRoot(document.getElementById('root'));
-ROOT.render(<Main/>);
+// Importanto Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+
+// Imporando Archivo CSS
+import './App.css';
+
+//Importando Componente de Renderizado
+import App from './App';
+
+const Root = ReactDOM.createRoot(document.getElementById('root'));
+
+Root.render(<App />);

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
+:root {
+  --Borde: gray;
+  --Fondo: #c5c5c5;
+}
+/* Principal Estructure Form */
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Campo de texto */ 
+
+.task-input {
+  width: 350px;
+  font-size: 18px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: gray;
+  font-weight: bold;
+  background-color: var(--Fondo);
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid var(--Borde);
+  border-right: none;
+  outline: none;
+}
+
+/* Add Task Button */
+.task-button {
+  padding: 11px;
+  font-size: 22px;
+  border: 2px solid var(--Borde);
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: var(--Fondo);
+  color: gray;
+  text-transform: capitalize;
+
+}
+
+.task-button:active{
+  padding: 11px;
+  font-size: 22px;
+  border: 2px solid var(--Borde);
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: var(--Fondo);
+  color: rgb(28, 38, 44);
+  text-transform: capitalize;
+
+}

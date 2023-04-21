@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #464646;
+  color: white;
+  font-family: Lato, sans-serif;
+  /*margin-top: 40px;*/
+}
+
+h1 {
+  color: #32261b;
+  font-size: 25px;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  margin: 15px 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.task-applications {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: -65px;
+}
+
+.tasks-list-principal {
+  width: 600px;
+  min-height: 500px;
+  background-color: #c5c5c5;
+  padding: 25px;
+  margin: 10px;
+  justify-content: center;
+  border-radius: 26px;
+  box-shadow: 2px 2px 4px 2px rgb(36, 35, 35);
+}
+
+.container-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoRP {
+  width: 500px;
+  margin-top: -80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
