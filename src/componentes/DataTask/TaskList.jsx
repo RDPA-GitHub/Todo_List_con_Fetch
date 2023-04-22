@@ -1,16 +1,60 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../../tasks-style/TaskList.css';
 import TaskForm from "./TaskForm";
 import TasksChildren from "./TasksChildren";
 
 const TaskList = () => {
+//--------------------------------------------------------------------
+// useEffect
 
-  const [tareas, setTareas] = useState([]);
-  const [text, setText] = useState("");
-  const [url] = useState('http://localhost:3002');
+useEffect(() => {
+  getHistory();
+}, []);
 
-// Agregando Tarea
+//--------------------------------------------------------------------  
+// Zona de Estados
+
+const [tareas, setTareas] = useState([]);
+const [text, setText] = useState("");
+const [error, setError] = useState(null);
+const [url] = useState('http://localhost:3002');
+
+//--------------------------------------------------------------------  
+
+
+// Funcion de Historial de Tareas
+
+const getHistory = () => {
+
+  //----------------------------------------------------------------------------
+
+  const options = {
+    method: 'GET', // Tipos de Metodos: (GET, POST, PUT, DELETE)
+    // body: (String) -> Solo se usa con POST & PUT
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  //-------------------------- Fetch Asincrono ---------------------------------
+
+  fetch(`${url}/notes`, options)
+    .then((response) => {
+      console.log(response)
+      return response.json();
+    })
+    .then((info) => {
+      console.log(info);
+      setTareas(info);
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
+}
+
+// Agregando Tarea - OK
   const agregarTarea = async tarea => {
   
     const options = {
@@ -33,10 +77,10 @@ const TaskList = () => {
 
       if (data.id) {
 
-        setTareas((prevState) => prevState.concat(data));
+        getHistory(); // Historial de la Data en la pagina
         setText(''); // Limpia el Input
         // setNotes((prevState) => [...prevState, data]);
-        // getNotes(); // Actualizar la Data en la pagina
+        // setTareas((prevState) => prevState.concat(data));
 
       }
 
@@ -56,10 +100,36 @@ const TaskList = () => {
     
   }
 
-// Eliminando Tarea
-  const eliminarTarea = id => {
-    const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
-    setTareas(tareasActualizadas);
+// Eliminando Tarea - OK
+  const eliminarTarea = async id => {
+
+    const options = {
+      method: 'DELETE',
+      //body:
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+    console.log('Item #' + id.toString() + ': Delete');
+
+    try {
+      const response = await fetch(`${url}/notes/${id}`, options);
+
+      if (response.status == 200) {
+
+        getHistory();
+        //setTareas((prevState) => prevState.filter((tareas) => tareas.id !== id));
+        setError(null);
+      } else {
+        setError("Error al intentar eliminar!");
+      }
+    }
+    catch (error) {
+      console.log(error.message);
+    }
+
+   /* const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
+    setTareas(tareasActualizadas);*/
   }
 
 // Completar Tarea
