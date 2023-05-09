@@ -135,6 +135,7 @@ const TaskList = () => {
 
   // Actualizar Tarea
   const ActualizarTarea = async (tarea) => {
+    
     const options = {
       method: 'PUT',
       body: JSON.stringify(tarea),
@@ -142,6 +143,7 @@ const TaskList = () => {
         "Content-Type": "application/json"
       }
     }
+
     try {
 
       const response = await fetch(`${url}/notes/${tarea.id}`, options);
@@ -185,12 +187,12 @@ const TaskList = () => {
         {
           tareas.map((tarea) => 
           <TasksChildren
-          key={tarea.id}
-          id={tarea.id}
-          texto={tarea.text}
-          completada={tarea.completada}
-          eliminarTarea={eliminarTarea}
-          completarTarea={completarTarea}
+            key={tarea.id}
+            id={tarea.id}
+            texto={tarea.text}
+            completada={tarea.completada}
+            eliminarTarea={eliminarTarea}
+            completarTarea={completarTarea}
           />
           )
         }

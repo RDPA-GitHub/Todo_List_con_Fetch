@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { FiSend } from 'react-icons/fi';
-import { v4 as uuidv4 } from 'uuid'; // Key encriptada - Sin uso para el Fetch API
 import '../../tasks-style/TaskForm.css';
+
+// Este componente Principal para colocar las tareas
 
 const TaskForm = ({ onSubmit }) => {
   //-------------------  ZONA DE FUNCIONES  ----------------------------------------
