@@ -37,22 +37,34 @@
   justify-content: center;
 }
 
- .tasks-icon1 {
+.task-input-2 {
+  border-right: none;
+  outline: none;
+
+}
+
+.task-button-2 {
+  border-left: none;
+
+}
+
+.tasks-icon1 {
   width: 18px;
   height: 18px;
   margin: 0 7px 0 8px;
-  
+
 }
+
 .tasks-icon2 {
   width: 18px;
   height: 18px;
   margin: 0 8px 0 7px;
-  
+
 }
 
 .tasks-icon1:hover {
-  width: 19px;
-  height: 19px;
+  width: 21px;
+  height: 21px;
   margin: 0 7px 0 8px;
   display: flex;
   align-items: center;
@@ -68,9 +80,4 @@
   align-items: center;
   justify-content: center;
   color: rgb(60, 86, 255);
-}
-
-.tasks-container.completada {
-  background-color: #40b36a;
-  text-decoration: line-through;
 }

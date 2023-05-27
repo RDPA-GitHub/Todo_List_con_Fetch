@@ -57,3 +57,18 @@
   text-transform: capitalize;
 
 }
+
+.Font-Size-Icon {
+
+  width: 25px;
+  height: 25px;
+
+}
+
+.Font-Size-Icon:active {
+
+  width: 25px;
+  height: 25px;
+  color: rgb(247, 31, 31);
+
+}

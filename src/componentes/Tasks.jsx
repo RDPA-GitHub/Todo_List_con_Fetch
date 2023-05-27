@@ -8,6 +8,7 @@ const Tasks = () => {
       <div className="tasks-list-principal">
         <h1>TODO LIST with FETCH API</h1>
           <TaskList />
+          
       </div>
     </div>
   );

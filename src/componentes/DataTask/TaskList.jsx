@@ -19,16 +19,19 @@ const TaskList = () => {
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
   const [notaActual, setNotaActual] = useState(null);
-  const [url] = useState('http://localhost:3002');
+  // const [url] = useState('http://localhost:3002');
+  const [url] = useState('https://assets.breatheco.de/apis/fake/todos/user');
 
-  const tareaActual = e => {
-    e.preventDefault();
-
-    if (notaActual.text !== '') ActualizarTarea(notaActual);
-  }
-
+  /*  const tareaActual = () => {
+     if (notaActual && notaActual.text !== '') {
+       ActualizarTarea('perrotp');
+     }
+   }
+  */
   //--------------------------------------------------------------------  
   // Funcion de Historial de Tareas
+
+  console.log('Text: ', text, 'Error: ', error, 'Nota Actual: ', notaActual);
 
   const getHistory = () => {
 
@@ -44,7 +47,7 @@ const TaskList = () => {
     //----------------------------------------------------------------------------
     //-------------------------- Fetch Asincrono ---------------------------------
 
-    fetch(`${url}/notes`, options)
+    fetch(`${url}/ronald2023`, options)
       .then((response) => {
         console.log(response)
         return response.json();
@@ -83,6 +86,7 @@ const TaskList = () => {
 
         getHistory(); // Historial de la Data en la pagina
         setText(''); // Limpia el Input
+
         // setNotes((prevState) => [...prevState, data]);
         // setTareas((prevState) => prevState.concat(data));
 
@@ -93,16 +97,46 @@ const TaskList = () => {
       console.log(error.message)
     }
 
-    /* if (tarea.texto.trim()) {
-      tarea.texto = tarea.texto.trim();
-      const tareasActualizadas = [...tareas, tarea ];
-      setTareas(tareasActualizadas);
-    }*/
+    // if (tarea.texto.trim()) {
+    //  tarea.texto = tarea.texto.trim();
+    //  const tareasActualizadas = [...tareas, tarea ];
+    //  setTareas(tareasActualizadas);
+    // }
 
   }
 
+  // Actualizar Tarea
+  /* const ActualizarTarea = async (tarea) => {
+      
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify(tarea),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  
+    try {
+  
+      const response = await fetch(`${url}/notes/${tarea.id}`, options);
+  
+      if (response.status === 200) {
+        getHistory();
+        //   setNotes((prevState) => prevState.filter((note) => note.id !== id))
+        setError(null);
+        setNotaActual(null);
+      } else {
+        setError("Error al intentar eliminar");
+      }
+  
+    } catch (error) {
+      console.log(error.message);
+    }
+  
+  } */
+
   // Eliminando Tarea - OK
-  const eliminarTarea = async id => {
+  /* const eliminarTarea = async id => {
 
     const options = {
       method: 'DELETE',
@@ -116,7 +150,7 @@ const TaskList = () => {
     try {
       const response = await fetch(`${url}/notes/${id}`, options);
 
-      if (response.status == 200) {
+      if (response.status === 200) {
 
         getHistory();
         //setTareas((prevState) => prevState.filter((tareas) => tareas.id !== id));
@@ -129,52 +163,10 @@ const TaskList = () => {
       console.log(error.message);
     }
 
-    /* const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
-     setTareas(tareasActualizadas);*/
-  }
+    // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
+    // setTareas(tareasActualizadas);
+  } */
 
-  // Actualizar Tarea
-  const ActualizarTarea = async (tarea) => {
-    
-    const options = {
-      method: 'PUT',
-      body: JSON.stringify(tarea),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-
-    try {
-
-      const response = await fetch(`${url}/notes/${tarea.id}`, options);
-
-      if (response.status == 200) {
-        getHistory();
-        //   setNotes((prevState) => prevState.filter((note) => note.id !== id))
-        setError(null);
-        setNotaActual(null);
-      } else {
-        setError("Error al intentar eliminar");
-      }
-
-    } catch (error) {
-      console.log(error.message);
-    }
-
-  }
-
-  // Completar Tarea
-  const completarTarea = id => {
-    const tareasActualizadas = tareas.map(
-      tarea => {
-        if (tarea.id === id) {
-          tarea.completada = !tarea.completada;
-        }
-        return tarea;
-      }
-    );
-    setTareas(tareasActualizadas);
-  }
 
   return (
     <>
@@ -183,17 +175,19 @@ const TaskList = () => {
       />
       {/* ----------------------------------------------------------- */}
       <div className="task-list-container">
-        
+
         {
           tareas.map((tarea) => 
-          <TasksChildren
-            key={tarea.id}
-            id={tarea.id}
-            texto={tarea.text}
-            completada={tarea.completada}
-            eliminarTarea={eliminarTarea}
-            completarTarea={completarTarea}
-          />
+
+            <TasksChildren
+              key={tarea.id}
+              id={tarea.id}
+              texto={tarea.label}
+            //completada = {tarea.completada}
+            //eliminarTarea = {eliminarTarea}
+            /* actualizarTarea = {tareaActual} */
+            />
+          
           )
         }
 
