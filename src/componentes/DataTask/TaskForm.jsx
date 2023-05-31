@@ -6,24 +6,29 @@ import { HiTrash } from 'react-icons/hi';
 
 // Este componente Principal para colocar las tareas
 
-const TaskForm = ({ onSubmit, deleteAll }) => {
+const TaskForm = ({ onSubmit, deleteAll}) => {
 
   //-------------------  ZONA DE FUNCIONES  ----------------------------------------
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState([]);
 
   const manejarCambio = e => {
     setInput(e.target.value);
+   
   }
 
   const manejarEnvio = e => {
 
     e.preventDefault();
-
+    
     if (input !== '') {
 
-      const tareaNueva = {
-        text: input
+      const tareaNueva = [
+        {
+          label: input ,
+          done: false
       }
+    ]
+      
       onSubmit(tareaNueva);
       setInput("");
     }
@@ -57,9 +62,14 @@ const TaskForm = ({ onSubmit, deleteAll }) => {
       </form>
 
       <button className="btn btn-secondary ms-2"
-        onClick={deleteAll}
+        onClick={() => {
+
+          deleteAll()
+
+        }
+        }
       >
-          <HiTrash className='Font-Size-Icon'/>
+        <HiTrash className='Font-Size-Icon' />
       </button>
 
     </div>

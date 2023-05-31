@@ -22,7 +22,6 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
   }; */
   
   const dataId = id.toString();
-  console.log(dataId, ': ', texto);
 
   return (
 
@@ -62,7 +61,7 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
             </>
             : */
           }
-          
+
           {texto}
 
       </div>

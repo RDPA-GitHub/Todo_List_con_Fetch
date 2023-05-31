@@ -29,12 +29,12 @@ const TaskList = () => {
    }
   */
 
-   //--------------------------------------------------------------------  
+  //--------------------------------------------------------------------  
   // Funcion de Historial de Tareas
 
-  console.log('Text: ', text, 'Error: ', error, 'Nota Actual: ', notaActual);
+  //console.log('Text: ', text, 'Error: ', error, 'Nota Actual: ', notaActual);
 
-   // Cargando Data - OK - GET
+  // Cargando Data - OK - GET
   const getHistory = () => {
 
     //----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const TaskList = () => {
 
     const options = {
       method: 'POST', // Tipos de Metodos: (GET, POST, PUT, DELETE)
-      body: JSON.stringify(/* tarea */ []), //-> Solo se usa con POST & PUT
+      body: JSON.stringify(/* tarea */[]), //-> Solo se usa con POST & PUT
       headers: {
         "Content-Type": "application/json"
       }
@@ -79,21 +79,11 @@ const TaskList = () => {
       const response = await fetch(`${url}`, options)
       //console.log(response);
 
-      const data = await response.json();
+      //const data = await response.json();
 
       console.log("Creacion de Array! -> OK!  ");
-      console.log(data);
-
-      if (data.id) {
-
-        getHistory(); // Historial de la Data en la pagina
-        setText(''); // Limpia el Input
-
-        // setNotes((prevState) => [...prevState, data]);
-        // setTareas((prevState) => prevState.concat(data));
-
-      }
-
+      //console.log(data);
+      getHistory();
     }
     catch (error) {
       console.log(error.message)
@@ -108,25 +98,35 @@ const TaskList = () => {
   }
 
   // Actualizar Tarea
-  /* const ActualizarTarea = async (tarea) => {
+  const ActualizarTarea = async (tarea) => {
       
     const options = {
       method: 'PUT',
-      body: JSON.stringify(tarea),
+      body: JSON.stringify(tareas),
       headers: {
         "Content-Type": "application/json"
       }
     }
-  
+     
     try {
   
-      const response = await fetch(`${url}/notes/${tarea.id}`, options);
-  
-      if (response.status === 200) {
-        getHistory();
-        //   setNotes((prevState) => prevState.filter((note) => note.id !== id))
-        setError(null);
-        setNotaActual(null);
+      const response = await fetch(`${url}`, options);
+      const info = await response.json();
+
+       //console.log(tareas[0].label)
+       
+      if (info.result) {
+        if (tareas.length === 1 && tareas[0].label === 'sample task'){
+          setTareas(tarea);
+         
+        }else {
+          setTareas((prevState) => prevState.concat(tarea))
+        }
+
+        setText('');
+        //getHistory();
+        
+      
       } else {
         setError("Error al intentar eliminar");
       }
@@ -135,9 +135,9 @@ const TaskList = () => {
       console.log(error.message);
     }
   
-  } */
+  }
 
-  // Eliminando Tarea - OK
+  // Eliminando Tarea individuales - OK - DELETE
   /*  const eliminarTarea = async id => {
 
     const options = {
@@ -170,7 +170,7 @@ const TaskList = () => {
   }  */
 
   // Delete All - OK - DELETE
-  const deleteAll = async id => {
+  const deleteAll = async () => {
 
     const options = {
       method: 'DELETE',
@@ -179,7 +179,7 @@ const TaskList = () => {
         "Content-Type": "application/json"
       }
     }
-    console.log('Item #' + id.toString() + ': Delete');
+    //console.log('Item #' + id.toString() + ': Delete');
 
     try {
       const response = await fetch(`${url}`, options);
@@ -187,7 +187,7 @@ const TaskList = () => {
       if (response.status === 200) {
 
         agregarTarea();
-       
+
         //setTareas((prevState) => prevState.filter((tareas) => tareas.id !== id));
         //setError(null);
 
@@ -201,30 +201,34 @@ const TaskList = () => {
 
     // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
     // setTareas(tareasActualizadas);
-  } 
-
+  }
+ 
   return (
     <>
       <TaskForm
-        onSubmit = {agregarTarea}
-        deleteAll = {deleteAll}
+        onSubmit={ActualizarTarea}
+        deleteAll={deleteAll}
       />
       {/* ----------------------------------------------------------- */}
       <div className="task-list-container">
 
         {
-          tareas.map((tarea, ID) => 
 
-            <TasksChildren
-              key={ID}
-              id={ID}
-              texto={tarea.label}
-            //completada = {tarea.completada}
-            //eliminarTarea = {eliminarTarea}
-            /* actualizarTarea = {tareaActual} */
-            />
-          
-          )
+
+          tareas.length > 0 && tareas[0].label !== 'sample task' &&
+
+            tareas.map((tarea, ID) =>
+
+              <TasksChildren
+                key={ID}
+                id={ID}
+                texto={tarea.label}
+              //completada = {tarea.completada}
+              //eliminarTarea = {eliminarTarea}
+              /* actualizarTarea = {tareaActual} */
+              />
+            )
+
         }
 
       </div>
