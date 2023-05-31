@@ -5,12 +5,6 @@ import TaskForm from "./TaskForm";
 import TasksChildren from "./TasksChildren";
 
 const TaskList = () => {
-  //--------------------------------------------------------------------
-  // useEffect
-
-  useEffect(() => {
-    getHistory();
-  }, []);
 
   //--------------------------------------------------------------------  
   // Zona de Estados
@@ -28,6 +22,13 @@ const TaskList = () => {
      }
    }
   */
+
+  //--------------------------------------------------------------------
+  // useEffect
+
+  useEffect(() => {
+    getHistory();
+  }, []);
 
   //--------------------------------------------------------------------  
   // Funcion de Historial de Tareas
@@ -99,7 +100,7 @@ const TaskList = () => {
 
   // Actualizar Tarea
   const ActualizarTarea = async (tarea) => {
-      
+
     const options = {
       method: 'PUT',
       body: JSON.stringify(tareas),
@@ -107,38 +108,39 @@ const TaskList = () => {
         "Content-Type": "application/json"
       }
     }
-     
+
     try {
-  
+
       const response = await fetch(`${url}`, options);
       const info = await response.json();
 
-       //console.log(tareas[0].label)
-       
+      //console.log(tareas[0].label)
+
       if (info.result) {
-        if (tareas.length === 1 && tareas[0].label === 'sample task'){
+        if (tareas.length === 1 && tareas[0].label === 'sample task') {
           setTareas(tarea);
-         
-        }else {
+
+        } else {
           setTareas((prevState) => prevState.concat(tarea))
+          
         }
 
         setText('');
         //getHistory();
-        
-      
+
+
       } else {
         setError("Error al intentar eliminar");
       }
-  
+
     } catch (error) {
       console.log(error.message);
     }
-  
+
   }
 
   // Eliminando Tarea individuales - OK - DELETE
-  /*  const eliminarTarea = async id => {
+ /*  const eliminarTarea = async id => {
 
     const options = {
       method: 'DELETE',
@@ -167,7 +169,7 @@ const TaskList = () => {
 
     // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
     // setTareas(tareasActualizadas);
-  }  */
+  } */
 
   // Delete All - OK - DELETE
   const deleteAll = async () => {
@@ -202,7 +204,7 @@ const TaskList = () => {
     // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
     // setTareas(tareasActualizadas);
   }
- 
+
   return (
     <>
       <TaskForm
@@ -217,17 +219,17 @@ const TaskList = () => {
 
           tareas.length > 0 && tareas[0].label !== 'sample task' &&
 
-            tareas.map((tarea, ID) =>
+          tareas.map((tarea, ID) =>
 
-              <TasksChildren
-                key={ID}
-                id={ID}
-                texto={tarea.label}
-              //completada = {tarea.completada}
-              //eliminarTarea = {eliminarTarea}
-              /* actualizarTarea = {tareaActual} */
-              />
-            )
+            <TasksChildren
+              key={ID}
+              id={ID}
+              texto={tarea.label}
+            //completada = {tarea.completada}
+            //eliminarTarea = {eliminarTarea}
+            /* actualizarTarea = {tareaActual} */
+            />
+          )
 
         }
 

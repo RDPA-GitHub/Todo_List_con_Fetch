@@ -4,7 +4,7 @@ import { HiTrash } from 'react-icons/hi';
 import { FiSend } from "react-icons/fi";*/
 
 
-const TasksChildren = ({ id, texto,eliminarTarea }) => {
+const TasksChildren = ({ id, texto, eliminarTarea }) => {
 
   /* const [Data, setData] = useState(false);
    const [inputUpdate, setInputUpdate] = useState('');
@@ -20,7 +20,7 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
     console.log(inputUpdate);
     currentChange();
   }; */
-  
+
   const dataId = id.toString();
 
   return (
@@ -60,9 +60,9 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
               </button>
             </>
             : */
-          }
+        }
 
-          {texto}
+        {texto}
 
       </div>
 
@@ -77,7 +77,7 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
 
         {/*----------------------------------------------------------------------------------- */}
 
-        <HiTrash className="tasks-icon1" onClick={() => eliminarTarea(id)} />
+        {/* <HiTrash className="tasks-icon1" onClick={() => eliminarTarea(id)} /> */}
 
 
       </div>
