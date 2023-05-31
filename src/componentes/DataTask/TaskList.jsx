@@ -20,7 +20,7 @@ const TaskList = () => {
   const [error, setError] = useState(null);
   const [notaActual, setNotaActual] = useState(null);
   // const [url] = useState('http://localhost:3002');
-  const [url] = useState('https://assets.breatheco.de/apis/fake/todos/user');
+  const [url] = useState('https://assets.breatheco.de/apis/fake/todos/user/ronald2023');
 
   /*  const tareaActual = () => {
      if (notaActual && notaActual.text !== '') {
@@ -28,11 +28,13 @@ const TaskList = () => {
      }
    }
   */
-  //--------------------------------------------------------------------  
+
+   //--------------------------------------------------------------------  
   // Funcion de Historial de Tareas
 
   console.log('Text: ', text, 'Error: ', error, 'Nota Actual: ', notaActual);
 
+   // Cargando Data - OK - GET
   const getHistory = () => {
 
     //----------------------------------------------------------------------------
@@ -47,7 +49,7 @@ const TaskList = () => {
     //----------------------------------------------------------------------------
     //-------------------------- Fetch Asincrono ---------------------------------
 
-    fetch(`${url}/ronald2023`, options)
+    fetch(`${url}`, options)
       .then((response) => {
         console.log(response)
         return response.json();
@@ -61,12 +63,12 @@ const TaskList = () => {
       })
   }
 
-  // Agregando Tarea - OK
-  const agregarTarea = async tarea => {
+  // Agregando Tarea - OK - POST
+  const agregarTarea = async () /*tarea*/ => {
 
     const options = {
       method: 'POST', // Tipos de Metodos: (GET, POST, PUT, DELETE)
-      body: JSON.stringify(tarea), //-> Solo se usa con POST & PUT
+      body: JSON.stringify(/* tarea */ []), //-> Solo se usa con POST & PUT
       headers: {
         "Content-Type": "application/json"
       }
@@ -74,12 +76,12 @@ const TaskList = () => {
 
     try {
 
-      const response = await fetch(`${url}/notes`, options)
+      const response = await fetch(`${url}`, options)
       //console.log(response);
 
       const data = await response.json();
 
-      console.log("Note Saved");
+      console.log("Creacion de Array! -> OK!  ");
       console.log(data);
 
       if (data.id) {
@@ -97,11 +99,11 @@ const TaskList = () => {
       console.log(error.message)
     }
 
-    // if (tarea.texto.trim()) {
-    //  tarea.texto = tarea.texto.trim();
-    //  const tareasActualizadas = [...tareas, tarea ];
-    //  setTareas(tareasActualizadas);
-    // }
+    /* if (tarea.texto.trim()) {
+      tarea.texto = tarea.texto.trim();
+      const tareasActualizadas = [...tareas, tarea ];
+      setTareas(tareasActualizadas);
+     } */
 
   }
 
@@ -136,7 +138,7 @@ const TaskList = () => {
   } */
 
   // Eliminando Tarea - OK
-  /* const eliminarTarea = async id => {
+  /*  const eliminarTarea = async id => {
 
     const options = {
       method: 'DELETE',
@@ -165,23 +167,57 @@ const TaskList = () => {
 
     // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
     // setTareas(tareasActualizadas);
-  } */
+  }  */
 
+  // Delete All - OK - DELETE
+  const deleteAll = async id => {
+
+    const options = {
+      method: 'DELETE',
+      //body:
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+    console.log('Item #' + id.toString() + ': Delete');
+
+    try {
+      const response = await fetch(`${url}`, options);
+
+      if (response.status === 200) {
+
+        agregarTarea();
+       
+        //setTareas((prevState) => prevState.filter((tareas) => tareas.id !== id));
+        //setError(null);
+
+      } else {
+        setError("Error al intentar eliminar!");
+      }
+    }
+    catch (error) {
+      console.log(error.message);
+    }
+
+    // const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
+    // setTareas(tareasActualizadas);
+  } 
 
   return (
     <>
       <TaskForm
-        onSubmit={agregarTarea}
+        onSubmit = {agregarTarea}
+        deleteAll = {deleteAll}
       />
       {/* ----------------------------------------------------------- */}
       <div className="task-list-container">
 
         {
-          tareas.map((tarea) => 
+          tareas.map((tarea, ID) => 
 
             <TasksChildren
-              key={tarea.id}
-              id={tarea.id}
+              key={ID}
+              id={ID}
               texto={tarea.label}
             //completada = {tarea.completada}
             //eliminarTarea = {eliminarTarea}

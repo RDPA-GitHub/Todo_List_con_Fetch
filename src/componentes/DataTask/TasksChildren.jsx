@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HiTrash } from 'react-icons/hi';
 /*import { FiEdit } from 'react-icons/fi';
 import { FiSend } from "react-icons/fi";*/
@@ -20,6 +20,9 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
     console.log(inputUpdate);
     currentChange();
   }; */
+  
+  const dataId = id.toString();
+  console.log(dataId, ': ', texto);
 
   return (
 
@@ -58,8 +61,9 @@ const TasksChildren = ({ id, texto,eliminarTarea }) => {
               </button>
             </>
             : */
-            texto
-        }
+          }
+          
+          {texto}
 
       </div>
 
