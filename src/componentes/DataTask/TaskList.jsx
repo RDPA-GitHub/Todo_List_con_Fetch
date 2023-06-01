@@ -14,7 +14,7 @@ const TaskList = () => {
   const [error, setError] = useState(null);
   const [notaActual, setNotaActual] = useState(null);
   // const [url] = useState('http://localhost:3002');
-  const [url] = useState('https://assets.breatheco.de/apis/fake/todos/user/ronald2023');
+  const [url] = useState('https://assets.breatheco.de/apis/fake/todos/user/RDPA-GitHub');
 
   /*  const tareaActual = () => {
      if (notaActual && notaActual.text !== '') {
@@ -122,7 +122,7 @@ const TaskList = () => {
 
         } else {
           setTareas((prevState) => prevState.concat(tarea))
-          
+          console.log(tareas);
         }
 
         setText('');
@@ -138,6 +138,8 @@ const TaskList = () => {
     }
 
   }
+
+  
 
   // Eliminando Tarea individuales - OK - DELETE
  /*  const eliminarTarea = async id => {
